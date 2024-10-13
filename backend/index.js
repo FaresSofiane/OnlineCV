@@ -1,34 +1,27 @@
-require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const port = process.env.PORT || '3002';
-const cors = require('cors');
-
-app.use(cors());
+require('dotenv').config();
+const authMiddleware = require('./middleware/authMiddleware');
 
 
 
-const apiRouter = require('./routes');
+// Middleware JSON
+app.use(express.json());
 
-//Parse des requetes en JSON
-app.use(express.json())
-
-//Connection BDD avec mongoose
+// Connexion à la base de données
 mongoose
     .connect(process.env.DATABASE_URL)
-    .then(() => {
-        console.log('Database connected');
-    })
-    .catch((error) => {
-        console.log(`Database connection error ${error}`);
-    })
+    .then(() => console.log('Database connected'))
+    .catch((error) => console.log(`Database connection error: ${error.message}`));
 
-// Recuperation des definitions de routes
+// Routes
+const apiRouter = require("./routes");
+
 app.use('/api/', apiRouter);
 
-//Lance le server sur le port renseigné
+// Démarrage du serveur
+const port = process.env.PORT || 3002;
 app.listen(port, () => {
-    console.log('server is running');
-})
-
+    console.log(`Server is running on port ${port}`);
+});
