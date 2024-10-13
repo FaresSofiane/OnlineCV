@@ -52,9 +52,15 @@ module.exports = {
             // Envoi de la réponse avec le token
             res.send({
                 message: 'Connexion réussie',
-                token: token
+                token: token,
+                user: {
+                    id: user.id,
+                    username: user.username,
+                    email: user.email
+                }
             });
         } catch (error) {
+            console.error(error);
             res.status(500).send({ error: 'Erreur de serveur' });
         }
     }
