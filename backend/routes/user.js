@@ -5,7 +5,7 @@ const CV = require('../models/CV');
 const authMiddleware = require('../middleware/authMiddleware');
 
 
-router.get('/users/cvs/public', authMiddleware, async (req, res) => {
+router.get('/cvs/public', authMiddleware, async (req, res) => {
     try {
         const users = await User.find();
 
