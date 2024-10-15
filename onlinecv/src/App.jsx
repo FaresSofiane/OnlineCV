@@ -11,9 +11,9 @@ import {UserContext, UserProvider} from "./context/UserContext.jsx";
 function App() {
 
   return (
-      <>
-          <div className="h-screen p-4 bg-gradient-to-t from-slate-500 to-sky-400">
-              <UserProvider>
+      <UserProvider>
+
+      <div className="h-screen p-4 bg-gradient-to-t from-slate-500 to-sky-400">
 
               <div className="row">
                   <Header/>
@@ -25,10 +25,10 @@ function App() {
                       <Route path="/login" element={<LoginScreen/>}/>
                       <Route path="/create_cv" element={<CreateCV/>}/>
                   </Routes>
-              </UserProvider>
           </div>
-      </>
-  )
+      </UserProvider>
+
+)
 }
 
 export default App

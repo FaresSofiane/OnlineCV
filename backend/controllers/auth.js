@@ -1,6 +1,7 @@
 const UserModel = require('./../models/User');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken'); // Pour générer un token d'authentification
+const jwt = require('jsonwebtoken');
+const {verifyUser} = require("../validator/user"); // Pour générer un token d'authentification
 
 module.exports = {
     // POST /register : Création d'un nouvel utilisateur (ce que tu as déjà)
