@@ -5,6 +5,7 @@ const CV = require('../models/CV');
 const CVPersoContent = require('../models/CV_Perso_Content');
 const CVExpPedago = require('../models/CV_Exp_Pedago');
 const CVExpPro = require('../models/CV_Exp_Pro');
+const User = require('../models/User');
 
 // Créer un CV complet (perso, plusieurs exp pédagogiques, plusieurs exp professionnelles)
 router.post('/cv', authMiddleware, async (req, res) => {
@@ -72,6 +73,62 @@ router.delete('/cv/:cv_id', authMiddleware, async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: 'Erreur lors de la suppression du CV' });
     }
+});
+
+router.get('/cv/:cv_id', authMiddleware, async (req, res) => {
+    const { cv_id } = req.params;
+
+    try {
+        // Récupérer le CV
+        const cv = await CV.findById(cv_id);
+
+        // Récupérer les informations personnelles
+        const persoContent = await CVPersoContent.findOne({ cv_id });
+
+        // Récupérer les expériences pédagogiques
+        const expPedago = await CVExpPedago.find({ cv_id });
+
+        // Récupérer les expériences professionnelles
+        const expPro = await CVExpPro.find({ cv_id });
+
+        res.status(200).json({ cv, persoContent, expPedago, expPro });
+    } catch (error) {
+        res.status(500).json({ error: 'Erreur lors de la récupération du CV' });
+    }
+});
+
+router.get('/cvs', authMiddleware, async (req, res) => {
+    const { user_id } = req.body;
+
+    try {
+        // Récupérer tous les CV de l'utilisateur
+        const cvs = await CV.find({ private: false });
+
+        console.log(cvs);
+        const allCVsInfo = await Promise.all(cvs.map(async (cv) => {
+            const cvId = cv._id;
+            const persoContent = await CVPersoContent.findOne({ cv_id: cvId });
+            const expPedago = await CVExpPedago.find({cv_id: cvId});
+            const expPro = await CVExpPro.find({cv_id: cvId});
+            const UserCV = await User.findById(cv.user_id);
+
+            return {
+                ...cv._doc,
+                UserCV,
+                persoContent,
+                expPedago,
+                expPro
+
+            };
+        }));
+
+
+        console.log(cvs);
+        res.status(200).json(allCVsInfo);
+    } catch (error) {
+        res.status(500).json({ error: 'Erreur lors de la récupération des CVs' });
+    }
+
 });
 
 module.exports = router;
