@@ -8,6 +8,10 @@ export default function LoginScreen() {
     const navigate = useNavigate();
     const { login } = useContext(UserContext);
 
+    const handleRegisterClick = () => {
+        navigate('/register');
+    };
+
     return (
         <div className="flex items-center justify-center mt-14">
             <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
@@ -29,7 +33,6 @@ export default function LoginScreen() {
                                     password: values.password
                                 })
                             });
-
                             if (response.ok) {
                                 const data = await response.json();
                                 login(data.user, data.token);
@@ -56,17 +59,18 @@ export default function LoginScreen() {
                                     name="email"
                                     placeholder="Entrez votre email"
                                 />
-                                <ErrorMessage name="email" component="div" className="text-sm text-red-600 mt-1" />
+                                <ErrorMessage name="email" component="div" className="text-sm text-red-600 mt-1"/>
                             </div>
                             <div className="form-group">
-                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Mot de passe:</label>
+                                <label htmlFor="password" className="block text-sm font-medium text-gray-700">Mot de
+                                    passe:</label>
                                 <Field
                                     className="w-full px-3 py-2 mt-1 text-gray-700 border rounded-md shadow-sm focus:ring-sky-500 focus:border-sky-500"
                                     type="password"
                                     name="password"
                                     placeholder="Entrez votre mot de passe"
                                 />
-                                <ErrorMessage name="password" component="div" className="text-sm text-red-600 mt-1" />
+                                <ErrorMessage name="password" component="div" className="text-sm text-red-600 mt-1"/>
                             </div>
                             <div className="flex items-center justify-between">
                                 <button
@@ -76,6 +80,15 @@ export default function LoginScreen() {
                                 >
                                     {isSubmitting ? 'Connexion...' : 'Se connecter'}
                                 </button>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <a
+                                    id="register"
+                                    className="text-xs hover:text-blue-500 cursor-pointer"
+                                    onClick={handleRegisterClick}
+                                >
+                                    Créer un Compte
+                                </a>
                             </div>
                         </Form>
                     )}

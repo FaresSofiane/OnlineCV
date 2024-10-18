@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
         req.user = decoded;  // Stocke les informations de l'utilisateur dans req.user
         next();
     } catch (error) {
+        console.error(error);
         res.status(400).json({ message: 'Token invalide' });
     }
 };
