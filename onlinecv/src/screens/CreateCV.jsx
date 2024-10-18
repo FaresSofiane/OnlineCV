@@ -2,12 +2,48 @@
 import React from "react";
 import { Field, Form, Formik, FieldArray } from "formik";
 import * as Yup from "yup";
+import jsPDF from "jspdf";
 import "./CreateCV.css"; // Ajout de l'importation du fichier CSS
 
 export default function CreateCV() {
+  const exportToPDF = (values) => {
+    const doc = new jsPDF();
+    doc.text("CV", 10, 10);
+    doc.text(`Nom: ${values.nom}`, 10, 20);
+    doc.text(`Prénom: ${values.prenom}`, 10, 30);
+    doc.text(`Âge: ${values.age}`, 10, 40);
+    doc.text(`Téléphone: ${values.telephone}`, 10, 50);
+    doc.text(`Email: ${values.email}`, 10, 60);
+    doc.text(`Adresse: ${values.adresse}`, 10, 70);
+
+    // Ajout des formations
+    values.formations.forEach((formation, index) => {
+      doc.text(`Formation ${index + 1}:`, 10, 80 + index * 10);
+      doc.text(`Diplôme: ${formation.diplome}`, 20, 90 + index * 10);
+      doc.text(`Institution: ${formation.institution}`, 20, 100 + index * 10);
+      doc.text(`Année: ${formation.annee}`, 20, 110 + index * 10);
+    });
+
+    // Ajout des expériences professionnelles
+    values.experiencesProfessionnelles.forEach((experience, index) => {
+      doc.text(`Expérience ${index + 1}:`, 10, 120 + index * 10);
+      doc.text(`Poste: ${experience.poste}`, 20, 130 + index * 10);
+      doc.text(`Entreprise: ${experience.entreprise}`, 20, 140 + index * 10);
+      doc.text(`Durée: ${experience.duree}`, 20, 150 + index * 10);
+    });
+
+    // Ajout des centres d'intérêts
+    values.centresInterets.forEach((centre, index) => {
+      doc.text(`Centre d'intérêt ${index + 1}:`, 10, 160 + index * 10);
+      doc.text(`Titre: ${centre.titre}`, 20, 170 + index * 10);
+    });
+
+    doc.save("cv.pdf");
+  };
+
   return (
     <div className="flex items-center justify-center mt-14">
-      <div className="w-[90vw] mx-auto p-8 space-y-6 bg-white rounded-lg shadow-md max-h-[80vh] overflow-y-auto">
+      <div className="w-[90vw] mx-auto p-8 space-y-6 bg-white rounded-lg shadow-md max-h-[75vh] overflow-y-auto">
         <h2 className="text-2xl font-bold text-center text-gray-700">
           Créer votre CV
         </h2>
@@ -16,13 +52,13 @@ export default function CreateCV() {
             nom: "",
             prenom: "",
             age: "",
-            telephone: "", // Remplacement de "numero" par "telephone"
+            telephone: "",
             email: "",
-            adresse: "", // Ajout de l'adresse
+            adresse: "",
             photo: null,
             formations: [],
             experiencesProfessionnelles: [],
-            centresInterets: [], // Ajout de la section Centres d'intérêts
+            centresInterets: [],
           }}
           onSubmit={(values) => {
             console.log("CV soumis:", values);
@@ -31,11 +67,11 @@ export default function CreateCV() {
             nom: Yup.string().required("Nom requis"),
             prenom: Yup.string().required("Prénom requis"),
             age: Yup.number().required("Âge requis").positive().integer(),
-            telephone: Yup.string().required("Téléphone requis"), // Remplacement de "numero" par "telephone"
+            telephone: Yup.string().required("Téléphone requis"),
             email: Yup.string()
               .email("Adresse email invalide")
               .required("Email requis"),
-            adresse: Yup.string().required("Adresse requise"), // Validation pour l'adresse
+            adresse: Yup.string().required("Adresse requise"),
             photo: Yup.mixed().required("Photo requise"),
             formations: Yup.array().of(
               Yup.object({
@@ -57,7 +93,6 @@ export default function CreateCV() {
               Yup.object({
                 titre: Yup.string().required("Titre requis"),
                 description: Yup.string(),
-                visibilite: Yup.string().required("Visibilité requise"),
               })
             ),
           })}
@@ -418,9 +453,16 @@ export default function CreateCV() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full px-4 py-2 font-bold text-white bg-sky-500 rounded-md hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
+                  className="w-1/2 px-4 py-2 font-bold text-white bg-sky-500 rounded-md hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500"
                 >
                   {isSubmitting ? "Enregistrement..." : "Enregistrer tout"}
+                </button>
+                <button
+                  type="button"
+                  className="w-1/2 ml-4 px-4 py-2 font-bold text-white bg-green-500 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                  onClick={() => exportToPDF(values)}
+                >
+                  Exporter en PDF
                 </button>
               </div>
             </Form>

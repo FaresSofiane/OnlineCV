@@ -19,17 +19,19 @@ function App() {
         <Routes>
           <Route path="/register" element={<RegisterScreen />} />
           <Route path="/login" element={<LoginScreen />} />
+          <Route path="/library" element={<CvLibrary />} />
 
-          {/* le temps de créer le modèle de cv */}
+          {/* le temps de créer le modèle de cv, je les met en public puis apres de nouveau restreint */}
           <Route path="/create_cv" element={<CreateCV />} />
           <Route path="/user" element={<UserProfile />} />
-          <Route path="/library" element={<CvLibrary />} />
+          {/* le temps de créer le modèle de cv, je les met en public puis apres de nouveau restreint */}
 
           {isAuthenticated ? (
             <>
               <Route path="/user" element={<UserProfile />} />
               <Route path="/" element={<WelcomeScreen />} />
               <Route path="/create_cv" element={<CreateCV />} />
+
               {/* Default authenticated route */}
               <Route path="*" element={<WelcomeScreen />} />
             </>
