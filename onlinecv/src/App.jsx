@@ -5,6 +5,7 @@ import WelcomeScreen from "./screens/WelcomeScreen.jsx";
 import RegisterScreen from "./screens/RegisterScreen.jsx";
 import LoginScreen from "./screens/LoginScreen.jsx";
 import CreateCV from "./screens/CreateCV.jsx";
+import CvLibrary from "./screens/CvLibrary.jsx";
 import { UserProvider, UserContext } from "./context/UserContext.jsx";
 import { useContext } from "react";
 
@@ -21,6 +22,8 @@ function App() {
 
           {/* le temps de créer le modèle de cv */}
           <Route path="/create_cv" element={<CreateCV />} />
+          <Route path="/user" element={<UserProfile />} />
+          <Route path="/library" element={<CvLibrary />} />
 
           {isAuthenticated ? (
             <>
