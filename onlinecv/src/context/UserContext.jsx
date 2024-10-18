@@ -6,6 +6,15 @@ export const UserContext = createContext(null);
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(null);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    const logIn = () => {
+        setIsAuthenticated(true);
+    };
+
+    const logOut = () => {
+        setIsAuthenticated(false);
+    };
 
     // Fonction pour se connecter et stocker les informations utilisateur + token
     const login = (logInfos, authToken) => {
@@ -51,7 +60,7 @@ const UserProvider = ({ children }) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ login, getUserInfos, logout, token, user }}>
+        <UserContext.Provider value={{  logIn, logOut ,login, getUserInfos, logout, token, user }}>
             {children}
         </UserContext.Provider>
     );

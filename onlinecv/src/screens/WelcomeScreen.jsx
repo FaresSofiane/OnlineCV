@@ -35,7 +35,7 @@ export default function WelcomeScreen() {
                 {cvs.map((cv, index) => (
                     <CvPreview key={index} username={cv.UserCV.username} id_cv={cv._id} />
                 ))}
-                
+
             </div>
         </div>
     );
