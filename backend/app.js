@@ -21,4 +21,9 @@ mongoose
 // Routes
 app.use('/api', apiRouter);
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
 module.exports = app;
