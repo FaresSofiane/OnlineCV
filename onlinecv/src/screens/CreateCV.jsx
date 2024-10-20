@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, Form, Formik, FieldArray } from "formik";
+import {Field, FieldArray, Form, Formik} from "formik";
 import * as Yup from "yup";
 import "./CreateCV.css"; // Ajout de l'importation du fichier CSS
 
@@ -7,7 +7,7 @@ export default function CreateCV() {
     const submitCV = async (values) => {
 
         try {
-            const response = await fetch("http://localhost:3002/api/cv/cv", {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/cv/cv`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

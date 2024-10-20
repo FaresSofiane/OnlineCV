@@ -1,15 +1,16 @@
 import React, {useContext} from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import {BrowserRouter as Router, Navigate, Route, Routes} from 'react-router-dom';
 import WelcomeScreen from './screens/WelcomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
-import { UserProvider, UserContext } from './context/UserContext';
+import {UserContext, UserProvider} from './context/UserContext';
 import ProtectedRoute from './ProtectedRoute';
 import Header from "./components/Header.jsx";
 import UserProfile from "./screens/UserProfile.jsx";
 import CvLibrary from "./screens/CvLibrary.jsx";
 import CreateCV from "./screens/CreateCV.jsx";
 import ViewCV from "./screens/ViewCV.jsx";
+
 
 const App = () => {
   return (

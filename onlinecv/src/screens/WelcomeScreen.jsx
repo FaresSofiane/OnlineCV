@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 import CvMosaic from "../components/CvMosaic.jsx";
-const API_URL = "http://localhost:3002/api/cv/cvs";
+
+const VITE_API_URL = `${import.meta.env.VITE_API_URL}/api/cv/cvs`;
 
 export default function WelcomeScreen() {
     const [cvs, setCvs] = useState([]);
@@ -18,7 +19,7 @@ export default function WelcomeScreen() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(API_URL, {
+        fetch(VITE_API_URL, {
             method: "GET",
             headers,
         })

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { Formik, Form, Field } from "formik";
+import React, {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 
 export default function ViewCV() {
@@ -16,7 +16,7 @@ export default function ViewCV() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(`http://localhost:3002/api/cv/cv/${cv_id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/api/cv/cv/${cv_id}`, {
             method: "GET",
             headers,
         })
@@ -45,7 +45,7 @@ export default function ViewCV() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(`http://localhost:3002/api/cv/cv/${cv_id}/section`, {
+        fetch(`${import.meta.env.VITE_API_URL}/api/cv/cv/${cv_id}/section`, {
             method: "PUT",
             headers,
             body: JSON.stringify({
@@ -68,7 +68,7 @@ export default function ViewCV() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(`http://localhost:3002/api/cv/cv/${cv_id}/commentaires`, {
+        fetch(`${import.meta.env.VITE_API_URL}/api/cv/cv/${cv_id}/commentaires`, {
             method: "POST",
             headers,
             body: JSON.stringify({
@@ -91,7 +91,7 @@ export default function ViewCV() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(`http://localhost:3002/api/cv/cv/${cv_id}/section`, {
+        fetch(`${import.meta.env.VITE_API_URL}/api/cv/cv/${cv_id}/section`, {
             method: "DELETE",
             headers,
             body: JSON.stringify({
@@ -113,7 +113,7 @@ export default function ViewCV() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(`http://localhost:3002/api/cv/cv/${cv_id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/api/cv/cv/${cv_id}`, {
             method: "DELETE",
             headers,
         })
