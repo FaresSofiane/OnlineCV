@@ -6,11 +6,18 @@ import { UserContext } from '../context/UserContext.jsx';
 
 export default function LoginScreen() {
     const navigate = useNavigate();
-    const { login } = useContext(UserContext);
+    const { user, login } = useContext(UserContext);
+
+    if (user) {
+        navigate('/', { replace: true });
+    }
+
 
     const handleRegisterClick = () => {
         navigate('/register');
     };
+
+
 
     return (
         <div className="flex items-center justify-center mt-14">
@@ -35,6 +42,9 @@ export default function LoginScreen() {
                             });
                             if (response.ok) {
                                 const data = await response.json();
+
+                                console.log(data);
+
                                 login(data.user, data.token);
                                 navigate('/', { replace: true });
                             } else {

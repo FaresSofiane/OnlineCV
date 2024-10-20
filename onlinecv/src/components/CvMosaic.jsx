@@ -1,13 +1,28 @@
 // CvMosaic.jsx
 // Mosaique de cv à partir de CvPreview
 import React from "react";
+import CvPreview from "./CvPreview.jsx";
 
-export default function CvMosaic() {
+
+export default function CvMosaic({cvs}) {
+  // Ensure cvs is an array
+  const cvsArray = Array.isArray(cvs) ? cvs : [];
+
+  console.log(cvsArray);
+
+  if (cvsArray.length === 0) {
+    return (
+        <div className="text-center">Aucun CV trouvé</div>
+    );
+  }
+
   return (
-    <div className="grid grid-cols-4 gap-4">
-      {Array.from({ length: 12 }).map((_, index) => (
-        <div key={index} className="bg-gray-200 h-24 w-32"></div>
-      ))}
-    </div>
+      <>
+        {cvsArray.map((cv, index) => (<>
+            <CvPreview key={"CVMOSAIC"+index} username={cv.UserCV.username} id_cv={cv._id} />
+
+            </>
+  ))}
+      </>
   );
 }

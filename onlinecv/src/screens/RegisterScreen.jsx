@@ -6,6 +6,7 @@ import * as Yup from 'yup';
 export default function RegisterScreen() {
     const navigate = useNavigate();
 
+
     return (
         <div className="flex items-center justify-center mt-14">
             <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
