@@ -1,12 +1,10 @@
-// src/app.js
-
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const authMiddleware = require('./middleware/authMiddleware');
-const apiRouter = require('./routes');
+const authMiddleware = require('../middleware/authMiddleware');
+const apiRouter = require('../routes');
 
 const app = express();
 app.use(cors());
