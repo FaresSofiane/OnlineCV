@@ -32,6 +32,7 @@ module.exports = {
 
     // POST /login : Authentification de l'utilisateur
     login: async (req, res) => {
+        console.log(req.body)
         const { email, password } = req.body;
 
         try {
