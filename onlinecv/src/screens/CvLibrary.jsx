@@ -2,7 +2,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import {UserContext} from "../context/UserContext.jsx";
 import {useNavigate} from "react-router-dom";
-const API_URL = "http://localhost:3002/api/cv/cv_of_user";
+
+const VITE_API_URL = `${import.meta.env.VITE_API_URL}/api/cv/cv_of_user`;
 
 
 
@@ -20,7 +21,7 @@ export default function CvLibrary() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(API_URL, {
+        fetch(VITE_API_URL, {
             method: "GET",
             headers,
         })

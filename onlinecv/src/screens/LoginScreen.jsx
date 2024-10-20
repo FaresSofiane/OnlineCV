@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import React, {useContext} from 'react';
+import {ErrorMessage, Field, Form, Formik} from 'formik';
+import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
-import { UserContext } from '../context/UserContext.jsx';
+import {UserContext} from '../context/UserContext.jsx';
 
 export default function LoginScreen() {
     const navigate = useNavigate();
@@ -17,6 +17,8 @@ export default function LoginScreen() {
         navigate('/register');
     };
 
+    console.log(import.meta.env.VITE_API_URL)
+    console.log(`${import.meta.env.VITE_API_URL}/api/auth/login`)
 
 
     return (
@@ -30,7 +32,7 @@ export default function LoginScreen() {
                     }}
                     onSubmit={async (values) => {
                         try {
-                            const response = await fetch('http://localhost:3002/api/auth/login', {
+                            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'

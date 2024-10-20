@@ -1,6 +1,6 @@
 import React from 'react';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
-import { useNavigate } from 'react-router-dom';
+import {ErrorMessage, Field, Form, Formik} from 'formik';
+import {useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
 
 export default function RegisterScreen() {
@@ -20,7 +20,7 @@ export default function RegisterScreen() {
                     }}
                     onSubmit={async (values, { setSubmitting }) => {
                         try {
-                            const response = await fetch('http://localhost:3002/api/auth/register', {
+                            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
