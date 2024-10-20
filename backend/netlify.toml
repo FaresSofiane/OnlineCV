@@ -1,5 +1,10 @@
 [build]
-  functions = "functions"
-
-[dev]
-  publish = "dist"
+publish = "dist"
+functions = "netlify/functions"
+[functions]
+external_node_modules = ["express"]
+[[redirects]]
+force = true
+status = 200
+from = "/*"
+to = "/.netlify/functions/api"
