@@ -1,48 +1,87 @@
+import React, {useContext} from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import WelcomeScreen from './screens/WelcomeScreen';
+import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
+import { UserProvider, UserContext } from './context/UserContext';
+import ProtectedRoute from './ProtectedRoute';
 import Header from "./components/Header.jsx";
-import { Routes, Route, Navigate } from "react-router-dom";
 import UserProfile from "./screens/UserProfile.jsx";
-import WelcomeScreen from "./screens/WelcomeScreen.jsx";
-import RegisterScreen from "./screens/RegisterScreen.jsx";
-import LoginScreen from "./screens/LoginScreen.jsx";
-import CreateCV from "./screens/CreateCV.jsx";
 import CvLibrary from "./screens/CvLibrary.jsx";
-import { UserProvider, UserContext } from "./context/UserContext.jsx";
-import { useContext } from "react";
+import CreateCV from "./screens/CreateCV.jsx";
+import ViewCV from "./screens/ViewCV.jsx";
 
-function App() {
-  const { isAuthenticated } = useContext(UserContext) || {}; // Fallback to avoid destructure error
+const App = () => {
+  return (
+      <UserProvider>
+        <UserConsumer /> {/* Utilise un composant enfant pour gérer la logique */}
+      </UserProvider>
+  );
+};
+
+// Un composant intermédiaire pour accéder au contexte après qu'il a été fourni
+const UserConsumer = () => {
+  const { user } = useContext(UserContext);
 
   return (
-    <UserProvider>
-      <div className="h-screen p-4 bg-gradient-to-t from-slate-500 to-sky-400">
-        <Header />
-        <Routes>
-          <Route path="/register" element={<RegisterScreen />} />
-          <Route path="/login" element={<LoginScreen />} />
-          <Route path="/library" element={<CvLibrary />} />
+      <div className="h-full min-h-full p-4 bg-gradient-to-t from-slate-500 to-sky-400">
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/login" element={<LoginScreen />} />
+            <Route path="/register" element={<RegisterScreen />} />
 
-          {/* le temps de créer le modèle de cv, je les met en public puis apres de nouveau restreint */}
-          <Route path="/create_cv" element={<CreateCV />} />
-          <Route path="/user" element={<UserProfile />} />
-          {/* le temps de créer le modèle de cv, je les met en public puis apres de nouveau restreint */}
+            {/* Route protégée pour WelcomeScreen */}
+            <Route
+                path="/welcome"
+                element={
+                  <ProtectedRoute>
+                    <WelcomeScreen />
+                  </ProtectedRoute>
+                }
+            />
 
-          {isAuthenticated ? (
-            <>
-              <Route path="/user" element={<UserProfile />} />
-              <Route path="/" element={<WelcomeScreen />} />
-              <Route path="/create_cv" element={<CreateCV />} />
+            {/* Route protégée pour UserProfile */}
+            <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute>
+                    <UserProfile />
+                  </ProtectedRoute>
+                }
+            />
 
-              {/* Default authenticated route */}
-              <Route path="*" element={<WelcomeScreen />} />
-            </>
-          ) : (
-            // Default non-authenticated route
-            <Route path="*" element={<Navigate to="/login" replace />} />
-          )}
-        </Routes>
+            {/* Redirection selon l'état de l'utilisateur */}
+            <Route
+                path="/"
+                element={user ? <Navigate to="/welcome" /> : <Navigate to="/login" />}
+            />
+
+            <Route path="*" element={<h1>404 - Page non trouvée</h1>} />
+
+            <Route path="/library" element={
+              <ProtectedRoute>
+              <CvLibrary />
+              </ProtectedRoute>} />
+
+            <Route path="/create_cv" element={
+                <ProtectedRoute>
+                <CreateCV />
+                </ProtectedRoute>} />
+
+              <Route path="/user" element={
+                <ProtectedRoute>
+                <UserProfile />
+                </ProtectedRoute>} />
+
+              <Route path="/view_cv/:cv_id" element={
+                <ProtectedRoute>
+                <ViewCV  />
+                </ProtectedRoute>} />
+          </Routes>
+        </Router>
       </div>
-    </UserProvider>
   );
-}
+};
 
 export default App;
