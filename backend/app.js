@@ -11,6 +11,7 @@ const apiRouter = require('./routes');
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"))
 
 // Connexion à la base de données
 mongoose
@@ -20,5 +21,8 @@ mongoose
 
 // Routes
 app.use('/api', apiRouter);
+
+app.listen(process.env.PORT || 3000,
+    () => console.log("Server is running..."));
 
 module.exports = app;
