@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const CV = require('../models/CV');
+const CV = require('../models/CV.js');
 const authMiddleware = require('../middleware/authMiddleware');
 
 
