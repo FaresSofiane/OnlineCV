@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../middleware/authMiddleware');
-const CV = require('../models/CV');
-const CVPersoContent = require('../models/CV_Perso_Content');
-const CVExpPedago = require('../models/CV_Exp_Pedago');
-const CVExpPro = require('../models/CV_Exp_Pro');
-const Commentaire = require('../models/Commentaire');
-const User = require('../models/User');
+const CV = require('../models/CV.js');
+const CVPersoContent = require('../models/CV_Perso_Content.js');
+const CVExpPedago = require('../models/CV_Exp_Pedago.js');
+const CVExpPro = require('../models/CV_Exp_Pro.js');
+const Commentaire = require('../models/Commentaire.js');
+const User = require('../models/User.js');
 
 // Créer un CV complet (perso, plusieurs exp pédagogiques, plusieurs exp professionnelles)
 router.post('/cv', authMiddleware, async (req, res) => {

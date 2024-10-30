@@ -1,6 +1,6 @@
 const express = require('express')
 const authRouter = require('./auth');
-const cvRouter = require('./cv');
+const cvRouter = require('./cv.js');
 const userRouter = require('./user');
 
 const router = express.Router();
