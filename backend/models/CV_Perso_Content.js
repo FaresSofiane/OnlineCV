@@ -8,4 +8,6 @@ const CVPersoContentSchema = new mongoose.Schema({
     mail: { type: String, required: true }
 });
 
-module.exports = mongoose.model('CV_Perso_Content', CVPersoContentSchema);
+const CVPersoContent = mongoose.model('CV_Perso_Content', CVPersoContentSchema);
+
+module.exports = CVPersoContent

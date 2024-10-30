@@ -5,4 +5,6 @@ const CVSchema = new mongoose.Schema({
     private: { type: Boolean, default: true }
 });
 
-module.exports = mongoose.model('CV', CVSchema);
+
+const CV = mongoose.model('CV', CVSchema);
+module.exports = CV

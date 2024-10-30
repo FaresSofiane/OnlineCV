@@ -8,4 +8,6 @@ const CVExpProSchema = new mongoose.Schema({
     commentaire: { type: String }
 });
 
-module.exports = mongoose.model('CV_Exp_Pro', CVExpProSchema);
+const CVExpPro = mongoose.model('CV_Exp_Pro', CVExpProSchema);
+
+module.exports = CVExpPro

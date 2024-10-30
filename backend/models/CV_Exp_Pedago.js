@@ -8,4 +8,6 @@ const CVExpPedagoSchema = new mongoose.Schema({
     commentaire: { type: String }
 });
 
-module.exports = mongoose.model('CV_Exp_Pedago', CVExpPedagoSchema);
+const CVExpPedago = mongoose.model('CV_Exp_Pedago', CVExpPedagoSchema);
+
+module.exports = CVExpPedago

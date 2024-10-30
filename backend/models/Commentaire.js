@@ -7,4 +7,6 @@ const CommentaireSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now }  // Date d'ajout du commentaire
 });
 
-module.exports = mongoose.model('Commentaire', CommentaireSchema);
+const Commentaire = mongoose.model('Commentaire', CommentaireSchema);
+
+module.exports = Commentaire
