@@ -1,10 +1,14 @@
-const router = require('express').Router();
-const autController = require('./../controllers/auth');
+// Importation des modules avec syntaxe ES6
+import { Router } from 'express';
+import * as autController from './../controllers/auth.js';
 
-// Creation d'un nouvel utilisateur
+const router = Router();
+
+// Création d'un nouvel utilisateur
 router.post('/register', autController.register);
 
 // Authentification de l'utilisateur
 router.post('/login', autController.login);
 
-module.exports = router;
+// Exportation du module avec syntaxe ES6
+export default router;

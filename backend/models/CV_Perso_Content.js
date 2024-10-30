@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose, {Model, Schema} from "mongoose";
 
-const CVPersoContentSchema = new mongoose.Schema({
-    cv_id: { type: mongoose.Schema.Types.ObjectId, ref: 'CV', required: true },
+const CVPersoContentSchema = new Schema({
+    cv_id: { type: Schema.Types.ObjectId, ref: 'CV', required: true },
     nom: { type: String, required: true },
     prenom: { type: String, required: true },
     date_naissance: { type: Date, required: true },
@@ -10,4 +10,4 @@ const CVPersoContentSchema = new mongoose.Schema({
 
 const CVPersoContent = mongoose.model('CV_Perso_Content', CVPersoContentSchema);
 
-module.exports = CVPersoContent
+export default CVPersoContent;

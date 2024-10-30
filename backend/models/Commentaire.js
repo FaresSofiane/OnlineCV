@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const CommentaireSchema = new mongoose.Schema({
     cv_id: { type: mongoose.Schema.Types.ObjectId, ref: 'CV', required: true },
@@ -9,4 +9,4 @@ const CommentaireSchema = new mongoose.Schema({
 
 const Commentaire = mongoose.model('Commentaire', CommentaireSchema);
 
-module.exports = Commentaire
+export default Commentaire;

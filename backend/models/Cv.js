@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const CVSchema = new mongoose.Schema({
     user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    private: { type: Boolean, default: true }
+    private_cv: { type: Boolean, default: true }
 });
 
-
 const CV = mongoose.model('CV', CVSchema);
-module.exports = CV
+
+export default CV;

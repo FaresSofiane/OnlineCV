@@ -1,7 +1,8 @@
-const mongoose = require('mongoose');
 
-const CVExpPedagoSchema = new mongoose.Schema({
-    cv_id: { type: mongoose.Schema.Types.ObjectId, ref: 'CV', required: true },
+import mongoose, {Model, Schema} from "mongoose";
+
+const CVExpPedagoSchema = new Schema({
+    cv_id: { type: Schema.Types.ObjectId, ref: 'CV', required: true },
     nom_diplome: { type: String, required: true },
     certificateur: { type: String, required: true },
     date: { type: Date, required: true },
@@ -10,4 +11,4 @@ const CVExpPedagoSchema = new mongoose.Schema({
 
 const CVExpPedago = mongoose.model('CV_Exp_Pedago', CVExpPedagoSchema);
 
-module.exports = CVExpPedago
+export default CVExpPedago;

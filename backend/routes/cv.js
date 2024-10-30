@@ -1,16 +1,18 @@
-const express = require('express');
-const router = express.Router();
-const authMiddleware = require('../middleware/authMiddleware');
-const CV = require('../models/CV.js');
-const CVPersoContent = require('../models/CV_Perso_Content.js');
-const CVExpPedago = require('../models/CV_Exp_Pedago.js');
-const CVExpPro = require('../models/CV_Exp_Pro.js');
-const Commentaire = require('../models/Commentaire.js');
-const User = require('../models/User.js');
+
+import  authMiddleware  from '../middleware/authMiddleware.js';
+import  User  from '../models/User.js';
+import  CV  from '../models/Cv.js';
+import  CVPersoContent  from '../models/CV_Perso_Content.js';
+import  CVExpPedago  from '../models/CV_Exp_Pedago.js';
+import  CVExpPro  from '../models/CV_Exp_Pro.js';
+import  Commentaire  from '../models/Commentaire.js';
+
+import { Router } from "express";
+const router = Router();
 
 // Créer un CV complet (perso, plusieurs exp pédagogiques, plusieurs exp professionnelles)
 router.post('/cv', authMiddleware, async (req, res) => {
-    const { user_id, private, persoContent, expPedago, expPro } = req.body;
+    const { user_id, private_cv, persoContent, expPedago, expPro } = req.body;
     const userId = req.user.id; // Extract user id from req.user
 
     try {
@@ -20,7 +22,7 @@ router.post('/cv', authMiddleware, async (req, res) => {
         }
 
         // Création du CV de base
-        const newCV = new CV({ user_id: user._id, private });
+        const newCV = new CV({ user_id: user._id, private_cv });
         await newCV.save();
 
         // Ajout des informations personnelles
@@ -126,7 +128,7 @@ router.get('/cvs', authMiddleware, async (req, res) => {
 
     try {
         // Récupérer tous les CV de l'utilisateur
-        const cvs = await CV.find({ private: false });
+        const cvs = await CV.find({ private_cv: false });
 
         const allCVsInfo = await Promise.all(cvs.map(async (cv) => {
             const cvId = cv._id;
@@ -277,12 +279,12 @@ router.delete('/cv/:cv_id/section', authMiddleware, async (req, res) => {
 
 router.put('/cv/:cv_id/privacy', authMiddleware, async (req, res) => {
     const { cv_id } = req.params;
-    const { privateStatus } = req.body;
+    const { private_cvStatus } = req.body;
 
-    console.log(cv_id, privateStatus);
+    console.log(cv_id, private_cvStatus);
 
     try {
-        const updatedCV = await CV.findByIdAndUpdate({_id : cv_id}, { private: privateStatus }, { new: true });
+        const updatedCV = await CV.findByIdAndUpdate({_id : cv_id}, { private_cv: private_cvStatus }, { new: true });
 
         if (!updatedCV) {
             return res.status(404).json({ error: 'CV not found' });
@@ -334,4 +336,5 @@ router.post('/cv/:cv_id/commentaires', authMiddleware, async (req, res) => {
         res.status(500).json({ error: 'Erreur lors de l\'ajout du commentaire' });
     }
 });
-module.exports = router;
+
+export default router;

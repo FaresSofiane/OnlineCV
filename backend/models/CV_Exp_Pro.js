@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose, {Model, Schema} from "mongoose";
 
-const CVExpProSchema = new mongoose.Schema({
-    cv_id: { type: mongoose.Schema.Types.ObjectId, ref: 'CV', required: true },
+const CVExpProSchema = new Schema({
+    cv_id: { type: Schema.Types.ObjectId, ref: 'CV', required: true },
     nom_entreprise: { type: String, required: true },
     poste_occupe: { type: String, required: true },
     date: { type: Date, required: true },
@@ -10,4 +10,4 @@ const CVExpProSchema = new mongoose.Schema({
 
 const CVExpPro = mongoose.model('CV_Exp_Pro', CVExpProSchema);
 
-module.exports = CVExpPro
+export default CVExpPro;
