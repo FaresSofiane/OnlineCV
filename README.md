@@ -1,6 +1,8 @@
 # OnlineCV
 
-[Voir en ligne](https://joyful-profiterole-2a5f9b.netlify.app/welcome)
+[Voir en ligne](https://joyful-profiterole-2a5f9b.netlify.app/)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7e87bf10-3830-4c2a-9937-4a4bf6612d59/deploy-status)](https://app.netlify.com/sites/joyful-profiterole-2a5f9b/deploys)
 
 ## Description de l'application
 
