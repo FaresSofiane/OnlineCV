@@ -1,5 +1,7 @@
 # OnlineCV
 
+[Voir en ligne](https://joyful-profiterole-2a5f9b.netlify.app/welcome)
+
 ## Description de l'application
 
 OnlineCV est une application web qui permet aux utilisateurs de créer, visualiser et gérer leurs CV en ligne. L'application offre des fonctionnalités telles que l'inscription, la connexion, la création de CV avec des informations personnelles, des expériences pédagogiques et professionnelles, ainsi que la possibilité de rendre les CV publics ou privés.
