@@ -10,11 +10,7 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors({
-    origin: ['https://your-frontend-domain.com'], // Replace with the actual domain name
-    methods: ['GET', 'POST'], // Adjust methods of your API
-    // other cors options
-}));
+app.use(cors())
 
 app.use(express.json());
 app.use(authMiddleware); // Make sure this is correctly defined
