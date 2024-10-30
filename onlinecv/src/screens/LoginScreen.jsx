@@ -18,7 +18,7 @@ export default function LoginScreen() {
     };
 
     console.log(import.meta.env.VITE_API_URL)
-    console.log(`http://onlinecv-production.up.railway.app/api/auth/login`)
+    console.log(`https://onlinecv-production.up.railway.app/api/auth/login`)
 
 
     return (
@@ -32,7 +32,7 @@ export default function LoginScreen() {
                     }}
                     onSubmit={async (values) => {
                         try {
-                            const response = await fetch(`http://onlinecv-production.up.railway.app/api/auth/login`, {
+                            const response = await fetch(`https://onlinecv-production.up.railway.app/api/auth/login`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'

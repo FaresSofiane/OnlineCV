@@ -7,7 +7,7 @@ export default function CreateCV() {
     const submitCV = async (values) => {
 
         try {
-            const response = await fetch(`http://onlinecv-production.up.railway.app/api/cv/cv`, {
+            const response = await fetch(`https://onlinecv-production.up.railway.app/api/cv/cv`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
