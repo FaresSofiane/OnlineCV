@@ -20,7 +20,7 @@ export default function RegisterScreen() {
                     }}
                     onSubmit={async (values, { setSubmitting }) => {
                         try {
-                            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
+                            const response = await fetch(`http://onlinecv-production.up.railway.app/api/auth/register`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'

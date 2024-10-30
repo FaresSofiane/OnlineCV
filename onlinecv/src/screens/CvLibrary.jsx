@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useState} from "react";
 import {UserContext} from "../context/UserContext.jsx";
 import {useNavigate} from "react-router-dom";
 
-const VITE_API_URL = `${import.meta.env.VITE_API_URL}/api/cv/cv_of_user`;
+const VITE_API_URL = `http://onlinecv-production.up.railway.app/api/cv/cv_of_user`;
 
 
 

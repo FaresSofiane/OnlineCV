@@ -16,7 +16,7 @@ export default function ViewCV() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(`${import.meta.env.VITE_API_URL}/api/cv/cv/${cv_id}`, {
+        fetch(`http://onlinecv-production.up.railway.app/api/cv/cv/${cv_id}`, {
             method: "GET",
             headers,
         })
@@ -45,7 +45,7 @@ export default function ViewCV() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(`${import.meta.env.VITE_API_URL}/api/cv/cv/${cv_id}/section`, {
+        fetch(`http://onlinecv-production.up.railway.app/api/cv/cv/${cv_id}/section`, {
             method: "PUT",
             headers,
             body: JSON.stringify({
@@ -68,7 +68,7 @@ export default function ViewCV() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(`${import.meta.env.VITE_API_URL}/api/cv/cv/${cv_id}/commentaires`, {
+        fetch(`http://onlinecv-production.up.railway.app/api/cv/cv/${cv_id}/commentaires`, {
             method: "POST",
             headers,
             body: JSON.stringify({
@@ -91,7 +91,7 @@ export default function ViewCV() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(`${import.meta.env.VITE_API_URL}/api/cv/cv/${cv_id}/section`, {
+        fetch(`http://onlinecv-production.up.railway.app/api/cv/cv/${cv_id}/section`, {
             method: "DELETE",
             headers,
             body: JSON.stringify({
@@ -113,7 +113,7 @@ export default function ViewCV() {
             "Content-Type": "application/json",
             Authorization: localStorage.getItem("token"),
         };
-        fetch(`${import.meta.env.VITE_API_URL}/api/cv/cv/${cv_id}`, {
+        fetch(`http://onlinecv-production.up.railway.app/api/cv/cv/${cv_id}`, {
             method: "DELETE",
             headers,
         })

@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import CvMosaic from "../components/CvMosaic.jsx";
 
-const VITE_API_URL = `${import.meta.env.VITE_API_URL}/api/cv/cvs`;
+const VITE_API_URL = `http://onlinecv-production.up.railway.app/api/cv/cvs`;
 
 export default function WelcomeScreen() {
     const [cvs, setCvs] = useState([]);
