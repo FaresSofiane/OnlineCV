@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -7,6 +7,7 @@ import { UserContext } from "../context/UserContext.jsx";
 export default function LoginScreen() {
   const navigate = useNavigate();
   const { user, login } = useContext(UserContext);
+  const [generalError, setGeneralError] = useState("");
 
   if (user) {
     navigate("/", { replace: true });
@@ -29,6 +30,7 @@ export default function LoginScreen() {
             password: "",
           }}
           onSubmit={async (values, { setSubmitting, setFieldError }) => {
+            setGeneralError("");
             try {
               const response = await fetch(
                 `https://onlinecv-production.up.railway.app/api/auth/login`,
@@ -54,14 +56,18 @@ export default function LoginScreen() {
                 const errorData = await response.json();
                 if (errorData.message === "Email inconnu") {
                   setFieldError("email", "Email inconnu");
+                  setGeneralError("Email inconnu");
                 } else if (errorData.message === "Mot de passe incorrect") {
                   setFieldError("password", "Mot de passe incorrect");
+                  setGeneralError("Mot de passe incorrect");
                 } else {
                   console.log("Erreur lors de la connexion", errorData);
+                  setGeneralError("Erreur lors de la connexion");
                 }
               }
             } catch (error) {
               console.log(error.message);
+              setGeneralError("Erreur de connexion au serveur");
             } finally {
               setSubmitting(false);
             }
@@ -122,6 +128,11 @@ export default function LoginScreen() {
                   {isSubmitting ? "Connexion..." : "Se connecter"}
                 </button>
               </div>
+              {generalError && (
+                <div className="text-sm text-red-600 mt-2 text-center">
+                  {generalError}
+                </div>
+              )}
               <div className="flex items-center justify-between">
                 <a
                   id="register"
