@@ -62,6 +62,7 @@ export default function LoginScreen() {
                   setGeneralError("Mot de passe incorrect");
                 } else {
                   console.log("Erreur lors de la connexion", errorData);
+                  setGeneralError("Adresse email ou mot de passe incorrect");
                 }
               }
             } catch (error) {
